@@ -1,0 +1,25 @@
+{
+  "name": "make_bundle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack index.js bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.9",
+    "highlightjs": "^9.10.0",
+    "postcss-loader": "^2.0.10",
+    "style-loader": "^0.19.1",
+    "tui-editor": "^1.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}
