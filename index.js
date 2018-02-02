@@ -11,7 +11,7 @@ console.log("2");
 
 if(hereUri.search("/mail/read") >= 0){
     console.log("WHY");
-    
+
     let content = $("#tuiContentVal").val().split("\n");
     for(let i = 0; i<content.length; i++){
         content[i] = content[i].trim();
@@ -23,7 +23,7 @@ if(hereUri.search("/mail/read") >= 0){
         }
     }
     content = content.join("\n");
-    
+
     $('#viewerSection').tuiEditor({
         previewStyle: 'vertical',
         height: '300px',
@@ -58,11 +58,10 @@ if(hereUri.search("/mail/read") >= 0){
         height: '500px',
         initialValue: replyContent,
     });
-    
+
 
     $('#mailForm').on('submit', function(){
-      let contents = $("#editSection").tuiEditor("getValue");
-      $('#mailForm').append('<input type="hidden" name="contents" value=\''+contents+'\'/>');
+      let mailBody = $("#editSection").tuiEditor("getValue");
+      $('#mailForm').append('<input type="hidden" name="mailBody" value=\''+mailBody+'\'/>');
     });
 }
-
