@@ -5,12 +5,9 @@ import 'highlightjs/styles/github.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
 
-console.log("1");
 let hereUri = $(location).attr('href');
-console.log("2");
 
 if(hereUri.search("/mail/read") >= 0){
-    console.log("WHY");
 
     let content = $("#tuiContentVal").val().split("\n");
     for(let i = 0; i<content.length; i++){
@@ -32,7 +29,6 @@ if(hereUri.search("/mail/read") >= 0){
     });
 } else if(hereUri.search("/mail/write") >= 0){
     let replyContent = $("#replyContent").val();
-    console.log(replyContent);
     if(replyContent !== ""){
         replyContent = replyContent.split("\n");;
         for(let i = 0; i<replyContent.length; i++){
