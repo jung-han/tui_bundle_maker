@@ -17,6 +17,7 @@
     "highlightjs": "^9.10.0",
     "postcss-loader": "^2.0.10",
     "style-loader": "^0.19.1",
+    "tui-date-picker": "^3.0.0",
     "tui-editor": "^1.0.1"
   },
   "devDependencies": {
