@@ -5,6 +5,7 @@ import 'highlightjs/styles/github.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
 import 'tui-date-picker/dist/tui-date-picker.css';
+import './tui-date-picker-custom.css';
 
 let hereUri = $(location).attr('href');
 
@@ -73,7 +74,7 @@ if(hereUri.search("/mail/read") >= 0){
     // 메일 작성시
     $('#mailForm').on('submit', function(){
       let mailBody = $("#editSection").tuiEditor("getValue");
-      let selectDate = datepicker.getDate().toISOString().substring(0, 10);
+      let selectDate = datepicker.getDate().toISOString().substring(0, 10)+" 00:00:00.0";
       $('#mailForm').append('<input type="hidden" name="mailBody" value=\''+mailBody+'\'/>');
       $('#mailForm').append('<input type="hidden" id="datepicker" name="expYmdt" value=\''+selectDate+'\'/>');
     });
