@@ -1,0 +1,6 @@
+.tui-datepicker-input{
+  height:100%;
+}
+.tui-datepicker{
+  z-index:9999;
+}

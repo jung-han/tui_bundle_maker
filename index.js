@@ -4,11 +4,12 @@ import 'codemirror/lib/codemirror.css';
 import 'highlightjs/styles/github.css';
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
+import 'tui-date-picker/dist/tui-date-picker.css';
+import './tui-date-picker-custom.css';
 
 let hereUri = $(location).attr('href');
 
 if(hereUri.search("/mail/read") >= 0){
-
     let content = $("#tuiContentVal").val().split("\n");
     content = content.join("\n");
 
@@ -29,17 +30,32 @@ if(hereUri.search("/mail/read") >= 0){
         replyContent = replyString + replyContent;
     }
 
+    // 답장 시 채워주는 부분
     $('#editSection').tuiEditor({
         initialEditType: 'markdown',
         previewStyle: 'vertical',
         height: '500px',
-        initialValue: replyContent,
+        initialValue: replyContent
     });
 
+    let DatePicker = require('tui-date-picker');
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate()+1);
+    let datepicker = new DatePicker('#wrapper', {
+        date: tomorrow,
+        selectableRanges: [
+            [tomorrow, new Date(2099, 12, 31)]
+        ],
+        input: {
+            element: '#datepicker',
+            format: 'yyyy-MM-dd'
+        }
+    });
 
+    // 메일 작성시
     $('#mailForm').on('submit', function(){
         let mailBody = $("#editSection").tuiEditor("getValue");
-        let findTag = ["<script>", "</script>"];
+        let findTag = ["<script>", "</script>", "<Script>","</Script>"];
         for(let i=0; i<findTag.length; i++){
             let regex = new RegExp(findTag[i], "g");
             mailBody = mailBody.replace(regex, "");
@@ -48,7 +64,11 @@ if(hereUri.search("/mail/read") >= 0){
         mailBody = mailBody.replace(regexSingleQuote, "&apos;");
         let regexDoubleQuote = new RegExp('"', "g");
         mailBody = mailBody.replace(regexDoubleQuote, "&quot;");
-
+        let selectDate = selectDate = datepicker.getDate().toISOString().substring(0, 10)+" 00:00:00.0";
+        
         $('#mailForm').append('<input type="hidden" name="mailBody" value=\''+mailBody+'\'/>');
+        if($("#expYn").is(":checked")){
+           $('#mailForm').append('<input type="hidden" id="datepicker" name="expYmdt" value=\''+selectDate+'\'/>');
+        }
     });
 }
