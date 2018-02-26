@@ -43,6 +43,7 @@ if(hereUri.search("/mail/read") >= 0){
     tomorrow.setDate(tomorrow.getDate()+1);
     let datepicker = new DatePicker('#wrapper', {
         date: tomorrow,
+        language: 'ko',
         selectableRanges: [
             [tomorrow, new Date(2099, 12, 31)]
         ],
@@ -55,6 +56,11 @@ if(hereUri.search("/mail/read") >= 0){
     // 메일 작성시
     $('#mailForm').on('submit', function(){
         let mailBody = $("#editSection").tuiEditor("getValue");
+        if(mailBody.length > 10000){
+          alert("메일 내용은 10000자를 초과할 수 없습니다.");
+          return false;
+        }
+
         let findTag = ["<script>", "</script>", "<Script>","</Script>"];
         for(let i=0; i<findTag.length; i++){
             let regex = new RegExp(findTag[i], "g");
@@ -65,7 +71,7 @@ if(hereUri.search("/mail/read") >= 0){
         let regexDoubleQuote = new RegExp('"', "g");
         mailBody = mailBody.replace(regexDoubleQuote, "&quot;");
         let selectDate = selectDate = datepicker.getDate().toISOString().substring(0, 10)+" 00:00:00.0";
-        
+
         $('#mailForm').append('<input type="hidden" name="mailBody" value=\''+mailBody+'\'/>');
         if($("#expYn").is(":checked")){
            $('#mailForm').append('<input type="hidden" id="datepicker" name="expYmdt" value=\''+selectDate+'\'/>');
