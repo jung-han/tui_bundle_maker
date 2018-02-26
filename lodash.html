@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LODASH</title>
+</head>
+<body>
+    <div id="appendPoint"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+    
+    <script type="text/x-lodash-template" id="listTemplate">
+        <% _.forEach(items, function(item){ %>
+            <div>
+                <h1><%-item.title%></h1>
+                <h3><%-item.content%></h3>
+            </div>
+        <% }); %>
+    </script>
+    <script>
+        let data = {
+            items:[{
+                    "title": "111",
+                    "content": "111"
+                } , {
+                    "title": "222",
+                    "content": "222"
+                } , {
+                    "title": "333",
+                    "content": "333"
+                } , {
+                    "title": "444",
+                    "content": "444"
+                }
+            ]
+        };
+        let items = data.items;
+        let compiled = _.template($("#listTemplate").html());
+        $("#appendPoint").html(compiled(data.items));
+    </script>
+</body>
+</html>
