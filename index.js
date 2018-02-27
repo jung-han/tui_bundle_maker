@@ -61,11 +61,6 @@ if(hereUri.search("/mail/read") >= 0){
           return false;
         }
 
-        let findTag = ["<script>", "</script>", "<Script>","</Script>"];
-        for(let i=0; i<findTag.length; i++){
-            let regex = new RegExp(findTag[i], "g");
-            mailBody = mailBody.replace(regex, "");
-        }
         let regexSingleQuote = new RegExp("'", "g");
         mailBody = mailBody.replace(regexSingleQuote, "&apos;");
         let regexDoubleQuote = new RegExp('"', "g");
